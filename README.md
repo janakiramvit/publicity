@@ -1,4 +1,4 @@
-# gcpWebApp
+# Example WebApp on Google Cloud App Engine
 Using java spring boot, angular, html for building a web app on google cloud.
 
 I have not followed the google model to create the webapp, its just my own model, but its been inspired from what Google taught. Also I put Chanrith's name here as I took his help through out in developing this project.
