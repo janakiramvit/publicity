@@ -9,7 +9,7 @@ This is a webapp that can run on google cloud directly if you replace values as 
 - Some configuration hints needed to deploy app on Google Cloud app engine
 #### What you will not learn from this?
 - How to create or setup Cloud App engine env, or Cloud DB or GCP env setup on local machine etc
- - But some of it is covered in the pre-deploy section below
+ -- But some of it is covered in the pre-deploy section below
 - if you need more help for this, connect to me on LI - Janakiram Pulipati
 
 ### Tech Stack:
