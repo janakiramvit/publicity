@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <i><h4 align="center">"You can take my factories, burn up my buildings, but give me MY PEOPLE and I’ll build the business right back again." - Henry Ford</h4></i>
+    <p></p></head>
+<body >
+<button ng-click="navigate('/feedback.html')" class="ui button" type="button">Customer Feedback</button>
+<button ng-click="navigate('/budget.html')" class="ui button" type="button">Expense sheet</button>
+<button ng-click="navigate('/attendance.html')" class="ui primary button" type="button">Time Sheets</button>
+<button ng-click="navigate('/ideas.html')" class="ui button" type="button">Ideas</button>
+<p>
+<br>
+<div class="ui divider"></div>
+<p>
+<div ng-controller="attendanceCtrl">
+    <p><h4><b> Time Sheets - Data post :{{postStatus}} </b></h4></p>
+</div>
+<form class="ui form" name="timesheet" method="post">
+    <div class="fields">
+        <div class="two wide field">
+            <div class="input-group" moment-picker="ctrl.datepicker" format="YYYY-MM-DD" today="true">
+                <span class="input-group-addon">
+                    <i class="octicon octicon-calendar"></i>
+                </span>
+                <input name="date"
+                       class="form-control"
+                       placeholder="Select a date"
+                       ng-model="ctrl.datepicker"
+                       ng-model-options="{ updateOn: 'blur' }" />
+            </div>
+
+        </div>
+        <div class="four wide field">
+            <input type="text" name="today_task" placeholder="Task today" ng-model="today_task_model">
+        </div>
+
+        <div class="three wide field">
+            <div class="ui container">
+                <div class="input-group1" moment-picker="ctrl.timepicker1" format="HH:mm">
+                    <span class="input-group-addon">
+                        <i class="octicon octicon-clock"></i>
+                    </span>
+                    <input name="intime" class="form-control1" placeholder="Select In-Time" ng-model="ctrl.timepicker1" ng-model-options="{ updateOn: 'blur' }" >
+                </div>
+
+            </div>
+
+        </div>
+        <div class="three wide field">
+            <div class="ui container">
+                <div class="input-group2" moment-picker="ctrl.timepicker2" format="HH:mm">
+                    <span class="input-group-addon">
+                        <i class="octicon octicon-clock"></i>
+                    </span>
+                    <input name="outtime" class="form-control2" placeholder="Select Out-Time" ng-model="ctrl.timepicker2" ng-model-options="{ updateOn: 'blur' }" >
+                </div>
+                <div ng-show="ctrl.timepicker2<ctrl.timepicker1" style="color: #ff0000">Invalid Entry, Out-time must be greater than In-time !</div>
+                <div ng-show="showme" style="color: #000000">Work Hours : {{ diffHours }}</div>
+
+
+                <br/>
+            </div>
+        </div>
+        <div class="field">
+            <button class="ui button" type="submit" ng-click="showme=true;postData()">Submit</button>
+        </div>
+    </div>
+    <div class="fields">
+    <div class="field"  ng-model="totalHours"><!--data-ng-init="getTotalHours()"-->
+        <h4><b> Total Work Hours this month: {{totalHours}}</b></h4>
+    </div>
+        </div>
+</form>
+<p>
+<div class="ui divider"></div>
+<p>
+<div ng-app="demo" ng-controller="attendanceCtrl">
+<p><p>
+    <h4>Add Time Sheets everyday, please !</h4>
+ <!--           <div>
+                <button class="ui button" type="submit" ng-click="getAttendanceData()">Get Time Sheet Data</button>
+            </div>
+  </br>
+    <div class="features ui grid noMargin" style="overflow-y:auto;white-space:nowrap;">
+        <table class="ui single line table">
+            <thead>
+            <tr>
+                <th> Date</th>
+                <th> Task</th>
+                <th> In Time</th>
+                <th> Out Time</th>
+                <th> Duration (in Hrs)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in attendance_data">
+                <td>{{ x.date }}</td>
+                <td>{{ x.task }}</td>
+                <td>{{ x.inTime}}</td>
+                <td>{{ x.outTime}}</td>
+                <td>{{ x.duration}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>-->
+</div>
+
+</body>
+
+</html>
