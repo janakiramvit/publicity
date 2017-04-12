@@ -55,4 +55,7 @@ Now code is all set to deploy.
 ### After deploy
 - Console would read Deployment 'Success' and you can browse the app by running 'gcloud app browse'
 
+### P.S:
+- This definitely works. But I am sure this code can be optimized a bit more.
+
 
