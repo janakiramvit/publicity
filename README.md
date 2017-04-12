@@ -1,5 +1,14 @@
 # Example WebApp on Google Cloud App Engine
-Using java spring boot, angular, html for building a web app on google cloud.
+
+What is this?
+This is a webapp that can run on google cloud directly if you replace values as mentioned below in 'Points to check'.
+
+Tech Stack:
+- Web Services: Java spring boot
+- Front End: Angular, Html 
+- Back End: Google Cloud SQL (MySQL)
+- Deployed on Google App Engine
+- Dependency mgmt: Maven
 
 I have not followed the google model to create the webapp, its just my own model, but its been inspired from what Google taught. Also I put Chanrith's name here as I took his help through out in developing this project.
 https://developers.google.com/eclipse/docs/creating_new_webapp
