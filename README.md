@@ -8,7 +8,8 @@ This is a webapp that can run on google cloud directly if you replace values as 
 -  You will know what should be the basic layout of the web app for it to work on Google cloud.
 #### What you will not get from this?
 - How to create or setup Cloud App engine env, or Cloud DB or GCP env setup on local machine etc
-- if you need help for this, connect to me on LI - Janakiram Pulipati
+ - But some of it is covered in the pre-deploy section below
+- if you need more help for this, connect to me on LI - Janakiram Pulipati
 
 ### Tech Stack:
 - Web Services: Java spring boot
@@ -31,15 +32,26 @@ https://developers.google.com/eclipse/docs/creating_new_webapp
 - in src/main/java/in/mw/attendance/attendanceRepository.java replace {dbname} with your database name
 - implement same step for feedbackRepository too
 
+Now code is all set to deploy.
+
 ### Pre Deploy:
 - Check if app runs on your system by replacing values of LocalDB in application.properties
+- If it successfully runs on LocalDB, then comment the localDB config and uncomment the CloudDB string value and keep the code ready to deploy
 - Before deploy, make sure: 
- - Cloud app engine is up and running
+ - Cloud app engine is up and running, billing is enabled etc for your app engine
  - Cloud DB is up and running
  - IMPORTANT: Incoming connection addresses in Cloud DB includes your VM IP addresses from App Engine
- - IMPORTANT: Oauth is enabled for your app
+  - Go to your DB - 'Access control' -> 'Authorization' -> 'Add Networks' -> Add VM IPaddress from App Engine
+ - IMPORTANT: Oauth is enabled for your app, this is how to do it:
   - API Manager -> Credentials -> Create Credentials -> OAuth Client ID -> Web Application -> Name - 'Any random name is fine' -> Authorized JavaScript origins -> https://yourapp.appspot.com, https://localhost:8080, http://localhost:8080
 
 ### Deploy
-- 
+- Once all the above setup is done on cloud, deploy the app to GCP from your local machine, this is easy
+- Go to the top level folder of your app and run
+ - mvn appengine:deploy
+- If it throws more questions at this stage, it means you have not setup the cloud environment properly
+
+### After deploy
+- Console would read Deployment 'Success' and you can browse the app by running 'gcloud app browse'
+
 
