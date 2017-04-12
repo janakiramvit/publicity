@@ -5,7 +5,8 @@ This is a webapp that can run on google cloud directly if you replace values as 
 
 ### Scope
 #### What you will learn from this?
--  You will know what should be the basic layout of the web app for it to work on Google cloud.
+- You will know what should be the basic layout of the web app for it to work on Google cloud.
+- Some configuration hints needed to deploy app on Google Cloud app engine
 #### What you will not learn from this?
 - How to create or setup Cloud App engine env, or Cloud DB or GCP env setup on local machine etc
  - But some of it is covered in the pre-deploy section below
