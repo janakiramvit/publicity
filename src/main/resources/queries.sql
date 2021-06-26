@@ -10,9 +10,9 @@ CREATE TABLE `attendance` (
   primary key(attendanceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into dbname.attendance2(date_value,task,inTime,outTime) values('2017-03-17','meet schools','12:25','19:30');
+insert into martech.attendance2(date_value,task,inTime,outTime) values('2017-03-17','meet schools','12:25','19:30');
 
-drop table dbname.feedback;
+drop table martech.feedback;
 
 CREATE TABLE `feedback` (
   `feedbackID` int not null auto_increment,

@@ -6,9 +6,9 @@
     <p></p></head>
 <body >
 <button ng-click="navigate('/feedback.html')" class="ui button" type="button">Customer Feedback</button>
-<button ng-click="navigate('/budget.html')" class="ui button" type="button">Expense sheet</button>
+<!--<button ng-click="navigate('/budget.html')" class="ui button" type="button">Expense sheet</button>-->
 <button ng-click="navigate('/attendance.html')" class="ui primary button" type="button">Time Sheets</button>
-<button ng-click="navigate('/ideas.html')" class="ui button" type="button">Ideas</button>
+<!--<button ng-click="navigate('/ideas.html')" class="ui button" type="button">Ideas</button>-->
 <p>
 <br>
 <div class="ui divider"></div>
@@ -73,6 +73,40 @@
         </div>
 </form>
 <p>
+<div class="ui divider"></div>
+<p>
+<div class="field"  ng-model="totalHours"><!--data-ng-init="getTotalHours()"-->
+    <h4><b> Publicize your business in less than 5 steps</b></h4>
+</div>
+<p>
+<form class="ui form" name="timesheet1" method="post">
+    <div class="fields">
+
+    <div>
+    1. Side view of the image:
+    <input type="file"  ngf-select name="fileToUpload1" id="fileToUpload1" ng-model="upload1" accept="image/*">
+        <hr />
+        <img ng-src="{{PreviewImage}}" ng-show="PreviewImage != null" alt="" style="height:200px;width:200px" />
+    </div>
+
+    <p>
+<div class="four wide field">
+    3. <input type="text" name="today_task" placeholder="Item price" ng-model="itemprice">
+</div>
+    <p>
+<div class="four wide field">
+    4. <input type="text" name="today_task" placeholder="Item name" ng-model="itemname">
+</div>
+    <p>
+<div class="four wide field">
+    5. <input type="text" name="today_task" placeholder="Outside price" ng-model="oprice">
+</div>
+
+<div class="field">
+<button class="ui button" type="submit" ng-click="showme=true;postData1($upload1)">Submit</button>
+</div>
+</div>
+</form>
 <div class="ui divider"></div>
 <p>
 <div ng-app="demo" ng-controller="attendanceCtrl">

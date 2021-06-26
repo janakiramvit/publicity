@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <i><h4 align="center">"When dealing with people, remember you are not dealing with creatures of logic, but creatures of emotion." - Dale Carnegie</h4></i>
+    <p></p>
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+<body>
+<button ng-click="navigate('/feedback.html')" class="ui primary button" type="button">Customer Feedback</button>
+<button ng-click="navigate('/budget.html')" class="ui button" type="button">Expense sheet</button>
+<button ng-click="navigate('/attendance.html')" class="ui button" type="button">Time Sheets</button>
+<button ng-click="navigate('/ideas.html')" class="ui button" type="button">Ideas</button>
+<p>
+<br>
+<div class="ui divider"></div>
+<p>
+    <div ng-controller="feedbackCtrl">
+<p><h4><b> Feedback Sheet - Data post :{{postStatus}}</b></h4></p>
+</div>
+<form class="ui form" name="feedback" method="post">
+    <div class="fields">
+
+        <div class="two wide field">
+            <div class="input-group" moment-picker="ctrl.datepicker" format="YYYY-MM-DD" today="true">
+                <span class="input-group-addon">
+                    <i class="octicon octicon-calendar"></i>
+                </span>
+                <input name="date"
+                       class="form-control"
+                       placeholder="Select a date"
+                       ng-model="ctrl.datepicker"
+                       ng-model-options="{ updateOn: 'blur' }" />
+            </div>
+
+        </div>
+
+        <div class="three wide field">
+            <input type="text" name="customerName" placeholder="Customer Name" ng-model="customer_name">
+        </div>
+
+        <div class="three wide field">
+            <input type="text" name="shopName" placeholder="Shop Name" ng-model="shopName">
+        </div>
+
+        <div class="four wide field">
+            <input type="text" name="feedback" placeholder="Write Feedback" ng-model="description">
+        </div>
+
+        </div>
+    <div class="fields">
+
+        <div class="two wide field">
+            <input type="text" name="customerID" placeholder="Customer ID" ng-model="customer_id">
+        </div>
+
+        <div class="three wide field">
+            <input type="text" name="address" placeholder="Address" ng-model="address">
+        </div>
+
+        <div class="two wide field">
+            <input type="text" name="phoneNumber" placeholder="Phone Number" ng-model="phoneNumber">
+        </div>
+
+        <div class="field">
+            <button class="ui button" type="submit" ng-click="postData()">Submit</button>
+        </div>
+
+    </div>
+    <br>
+    <div class="fields">
+        <div class="field" ng-model="total_feedback">
+            <h4><b> Total Feedback this month: {{total_feedback}}</b></h4>
+        </div>
+    </div>
+
+</form>
+<p>
+
+<div class="ui divider"></div>
+<p>
+    <br>
+<div ng-app="demo" ng-controller="feedbackCtrl">
+    <!-- <div class="ui two column doubling stackable grid container">-->
+
+    <div>
+        <button class="ui button" type="submit" ng-click="getFeedbackData()">Get list of Feedback</button>
+    </div>
+
+    <!--<div class="column">
+        <div class="ui action input">
+            <input type="text" placeholder="Search by ...(coming soon)">
+            <select class="ui compact selection dropdown">
+                <option selected="" value="ID">ID</option>
+                <option value="Name">Name</option>
+            </select>
+            <div type="submit" class="ui button">Search</div>
+        </div>
+    </div>-->
+    <!--</div>-->
+    </br>
+    <div class="features ui grid noMargin" style="overflow-y:auto;white-space:nowrap;">
+        <table class="ui single line table">
+            <thead>
+            <tr>
+                <th> Date</th>
+                <th> Description</th>
+                <th> Customer Name</th>
+                <th> Shop Name</th>
+                <th> Address</th>
+                <th> Phone Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in feedback_data">
+                <td>{{ x.date }}</td>
+                <td>{{ x.feedback }}</td>
+                <td>{{ x.customerName}}</td>
+                <td>{{ x.shopName}}</td>
+                <td>{{ x.address}}</td>
+                <td>{{ x.phoneNumber}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div></p>
+
+</body>
+
+</html>

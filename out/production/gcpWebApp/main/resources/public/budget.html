@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <i><h4 align="center">"A customer is the most important visitor on our premises. He is not dependent on us. We are dependent on him." - MK Gandhi</h4></i>
+    <p></p>
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+<body>
+<button ng-click="navigate('/feedback.html')" class="ui button" type="button">Customer Feedback</button>
+<button ng-click="navigate('/budget.html')" class="ui primary button" type="button">Expense sheet</button>
+<button ng-click="navigate('/attendance.html')" class="ui button" type="button">Time Sheets</button>
+<button ng-click="navigate('/ideas.html')" class="ui button" type="button">Ideas</button>
+<p>
+<br>
+<div class="ui divider"></div>
+<p>
+<div ng-controller="budgetCtrl">
+    <p><h4><b> Expense Sheet - Data post :{{postStatus}}</b></h4></p>
+</div>
+<form class="ui form" name="budget" method="post">
+    <div class="fields">
+
+        <div class="two wide field">
+            <div class="input-group" moment-picker="ctrl.datepicker" format="YYYY-MM-DD" today="true">
+                <span class="input-group-addon">
+                    <i class="octicon octicon-calendar"></i>
+                </span>
+                <input name="date"
+                       class="form-control"
+                       placeholder="Select a date"
+                       ng-model="ctrl.datepicker"
+                       ng-model-options="{ updateOn: 'blur' }" />
+            </div>
+
+        </div>
+
+        <div class="three wide field">
+            <input type="text" name="description" placeholder="Expense Description" ng-model="description_model">
+        </div>
+
+        <div class="two wide field">
+            <input type="number" name="today_task" placeholder="Expense Amount" ng-model="expense_amount_model">
+        </div>
+
+
+        <div class="inline field">
+            <select class="ui dropdown" ng-model="paid_by">
+                <option value="">Who Paid?</option>
+                <option value="Janakiram">Janakiram</option>
+                <option value="Ravi">Ravi</option>
+                <option value="Riyaz">Riyaz</option>
+                <option value="Ashok">Ashok</option>
+                <option value="Mohan">Mohan</option>
+            </select>
+        </div>
+
+
+        <div class="inline field">
+            <select class="ui dropdown" ng-model="rr">
+                <option value="">Refund Required?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+
+    <div class="field">
+        <input type="number" name="today_task" placeholder="Refund how much?" ng-model="refund_amount_model">
+    </div>
+        <div class="field">
+    <button class="ui button" type="submit" ng-click="postData()">Submit</button>
+            </div>
+
+</div>
+    <br>
+    <div class="fields">
+        <div class="field" ng-model="total_amount">
+            <h4><b> Total Budget this month: {{total_amount}}</b></h4>
+        </div>
+    </div>
+
+</form>
+<p>
+
+<div class="ui divider"></div>
+<p>
+<div ng-app="demo" ng-controller="budgetCtrl">
+    <!-- <div class="ui two column doubling stackable grid container">-->
+
+    <div>
+        <button class="ui button" type="submit" ng-click="getExpenseData()">Get Expense Data</button>
+    </div>
+
+    <!--<div class="column">
+        <div class="ui action input">
+            <input type="text" placeholder="Search by ...(coming soon)">
+            <select class="ui compact selection dropdown">
+                <option selected="" value="ID">ID</option>
+                <option value="Name">Name</option>
+            </select>
+            <div type="submit" class="ui button">Search</div>
+        </div>
+    </div>-->
+    <!--</div>-->
+    </br>
+    <div class="features ui grid noMargin" style="overflow-y:auto;white-space:nowrap;">
+        <table class="ui single line table">
+            <thead>
+            <tr>
+                <th> Date</th>
+                <th> Description</th>
+                <th> Amount</th>
+                <th> Paid By</th>
+                <th> Refund (in INR)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in expense_data">
+                <td>{{ x.date }}</td>
+                <td>{{ x.description }}</td>
+                <td>{{ x.amount}}</td>
+                <td>{{ x.whoPaid}}</td>
+                <td>{{ x.refundAmount}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div></p>
+
+</body>
+
+</html>

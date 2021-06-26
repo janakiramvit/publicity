@@ -23,13 +23,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 
-		<INSTANCE_CONNECTION_NAME>{replace-value}</INSTANCE_CONNECTION_NAME>
-		<user>{replace-value}</user>
-		<password>{replace-value}</password>
-		<database>{replace-value}</database>
+		<INSTANCE_CONNECTION_NAME>localhost:3306</INSTANCE_CONNECTION_NAME>
+		<user>root</user>
+		<password>1234</password>
+		<database>martech</database>
 		<appengine.maven.plugin>1.0.0</appengine.maven.plugin>
 		<failOnMissingWebXml>false</failOnMissingWebXml> <!-- REQUIRED -->
-		<sqlURL>jdbc:mysql://google/${database}?cloudSqlInstance=${INSTANCE_CONNECTION_NAME}&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=${user}&amp;password=${password}&amp;useSSL=false</sqlURL>
+		<sqlURL>jdbc:mysql://localhost:3306/martech&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=${user}&amp;password=${password}&amp;useSSL=false</sqlURL>
 	</properties>
 
 	<dependencies>
@@ -41,19 +41,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+			<version>8.0.17</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.google.cloud.sql</groupId>
-			<artifactId>mysql-socket-factory</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -70,19 +63,29 @@
 			<version>20140107</version>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Internal repo</name>
+			<url>F:\folder-repo</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
+		<defaultGoal>compile</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<version>${appengine.maven.plugin}</version>
-			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>3.0.0</version>
+			</extension>
+		</extensions>
 	</build>
 
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.sql.Timestamp;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -23,8 +23,8 @@ public class attendanceController {
     private attendanceRepository attendanceRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/post/attendance", consumes = "application/x-www-form-urlencoded")
-    public void addAttendance(@RequestBody String attendance_encoded) throws UnsupportedEncodingException, DecoderException {
-        System.out.println("Controller: Inside Post of attendance - " + attendance_encoded);
+    public void addAttendance(@RequestBody String attendance_encoded) throws UnsupportedEncodingException, DecoderException, SQLException {
+        System.out.println("java Controller: Inside Post of attendance - " + attendance_encoded);
 
         attendance attendance = new attendance();
         String attendance_decoded = URLDecoder.decode(attendance_encoded, "UTF-8").substring(11);
@@ -35,7 +35,7 @@ public class attendanceController {
         String inTime =jsonObject.get("inTime").toString();
         String outTime =jsonObject.get("outTime").toString();
 
-        System.out.println("Controller: Set attendance class - " + attendance_decoded);
+        System.out.println("java Controller: Set attendance class - " + attendance_decoded);
 
         attendance.setDate(date);
         attendance.setTask(task);
@@ -43,6 +43,32 @@ public class attendanceController {
         attendance.setOutTime(outTime);
 
         attendanceRepository.addAttendance(attendance);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/post/publicity", consumes = "application/x-www-form-urlencoded")
+    public void addPublicity(@RequestBody String attendance_encoded) throws UnsupportedEncodingException, DecoderException, SQLException {
+        System.out.println("java Controller: Inside Post of attendance - " + attendance_encoded);
+
+        publicity publicity = new publicity();
+        String attendance_decoded = URLDecoder.decode(attendance_encoded, "UTF-8").substring(11);
+
+        JSONObject jsonObject = new JSONObject(attendance_decoded);
+        String upload1 = jsonObject.get("upload1").toString();
+        String upload2 = jsonObject.get("upload2").toString();
+        String itemprice =jsonObject.get("itemprice").toString();
+        String itemname =jsonObject.get("itemname").toString();
+        String oprice =jsonObject.get("oprice").toString();
+
+        System.out.println("java Controller: Set publicity class - " + attendance_decoded);
+
+        publicity.setUpload1(upload1);
+        publicity.setUpload2(upload2);
+        publicity.setItemprice(itemprice);
+        publicity.setItemname(itemname);
+        publicity.setOprice(oprice);
+
+        attendanceRepository.addPublicity(publicity);
     }
 
     @RequestMapping("/get/attendance")
@@ -54,7 +80,7 @@ public class attendanceController {
     @RequestMapping("/get/totalHours")
     public List<String> getTotalHours(){
         List<String> ret = attendanceRepository.getTotalHours();
-        System.out.println(ret);
+        System.out.println("totalhours - java controller " + ret);
         return ret;
     }
 

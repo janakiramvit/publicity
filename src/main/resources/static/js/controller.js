@@ -28,7 +28,7 @@ app.controller('loginCtrl',['$scope','$location','$window','$rootScope', functio
 }]);
 
 app.controller('attendanceCtrl',['$scope','$http','$location',function ($scope,$http,$location) {
-    console.log("Inside attendance page controller");
+    console.log("Inside attendance page controller here");
     $scope.navigate = function(entry){
         console.log("navigating to page - "+ entry)
         $location.url(entry);
@@ -120,6 +120,55 @@ app.controller('attendanceCtrl',['$scope','$http','$location',function ($scope,$
             $scope.loading = false;
         })
     }
+
+    //duplicate function for image upload
+     $scope.postData1 = function (e) {
+     //console.log("reached 0 " + file.upload);
+     console.log("reached: " + $scope.itemprice );
+     console.log("reached: " + $scope.itemname );
+     console.log("reached, alert below: " + $scope.upload1 );
+      console.log("reached, alert below: " + e);
+        var reader = new FileReader();
+//        reader.readAsDataURL = function (e) {
+//         console.log("reached1, alert below: " + e.target.result);
+//        };
+       //reader.readAsDataURL(e.target);
+       // console.log(reader.readAsDataURL(e.target.files[0])); //TypeError: Cannot read property '0' of undefined
+       // console.log(reader.readAsDataURL(e.target)); //TypeError: Failed to execute 'readAsDataURL' on 'FileReader': parameter 1 is not of type 'Blob'.
+
+               console.log(reader.readAsDataURL(e.target.result));
+
+         console.log("end print");
+          var data = $.param({
+              time_sheet:JSON.stringify({
+                  upload1:$scope.ctrl.upload1,
+                  upload2:$scope.ctrl.upload2,
+                  itemprice:$scope.itemprice,
+                  itemname:$scope.itemname,
+                  oprice:$scope.oprice
+              })
+          });
+
+          console.log("Post Data for publicity: " + data)
+          $http({
+              method:'POST',
+              url:'/post/publicity',
+              headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+              data: data,
+          }).success(function(data,status){
+              var final_status
+              if(status === 200){
+                  final_status = " successful. Now fill data into other forms"
+              } else{
+                  final_status = " not successful. Contact Admin."
+              }
+              $scope.postStatus = final_status;
+              $scope.getTotalHours();
+          }).error(function(data,status){
+              console.log('Post not success');
+              $scope.postStatus = status;
+          })
+      }
 
 
 }]);

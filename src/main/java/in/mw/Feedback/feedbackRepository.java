@@ -1,6 +1,6 @@
 package in.mw.Feedback;
 
-import in.mw.Budget.expenseSheet;
+//import in.mw.Budget.expenseSheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -38,23 +38,23 @@ public class feedbackRepository {
         String phoneNumber = feedback.getPhoneNumber();
         String shopName = feedback.getShopName();
 
-        jdbcTemplate.update("insert into {dbname}.feedback(date_value,customerName,customerID,description,address,phoneNumber,shopName) values(?,?,?,?,?,?,?)",
+        jdbcTemplate.update("insert into martech.feedback(date_value,customerName,customerID,description,address,phoneNumber,shopName) values(?,?,?,?,?,?,?)",
                 date,customerName,customerID,description,address,phoneNumber,shopName);
         platformTransactionManager.commit(status);
         System.out.println("Java Controller: Feedback: Post Success");
     }
 
     public List<feedback> getAllFeedback(){
-        List<feedback> listFeedback = jdbcTemplate.query("SELECT * FROM {dbname}.feedback where extract(month from date_value) = 3", new RowMapper<feedback>() {
+        List<feedback> listFeedback = jdbcTemplate.query("SELECT * FROM martech.feedback where extract(month from date_value) = 3", new RowMapper<feedback>() {
             @Override
             public feedback mapRow(ResultSet resultSet, int i) throws SQLException {
                 feedback feedback = new feedback();
                 feedback.setDate(resultSet.getString("date_value"));
                 feedback.setFeedback(resultSet.getString("description"));
                 feedback.setCustomerName(resultSet.getString("customerName"));
-                feedback.setPhoneNumber(resultSet.getString("phoneNumber"));
-                feedback.setShopName(resultSet.getString("shopName"));
-                feedback.setAddress(resultSet.getString("address"));
+                //feedback.setPhoneNumber(resultSet.getString("phoneNumber"));
+                //feedback.setShopName(resultSet.getString("shopName"));
+                //feedback.setAddress(resultSet.getString("address"));
 
                 return feedback;
             }
@@ -67,7 +67,7 @@ public class feedbackRepository {
     }
 
     public Integer getTotalFeedback(){
-        String sql = "select sec_to_time(sum(time_to_sec(amount))) from {dbname}.feedback";
+        String sql = "select sec_to_time(sum(time_to_sec(amount))) from martech.feedback";
         Integer total_hours = jdbcTemplate.queryForObject(sql,Integer.class);
         return total_hours;
     }
